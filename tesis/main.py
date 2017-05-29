@@ -3,8 +3,6 @@ from flask import render_template
 from flask import request
 import forms
 import minimalmodbus
-import os
-import time
 
 #port='/dev/ttyUSB0'
 #nodo=2
