@@ -1,0 +1,8 @@
+[Unit]
+After=vpn.service
+
+[Service]
+ExecStart=/etc/systemd/system/minoir.sh
+
+[Install]
+WantedBy=default.target
