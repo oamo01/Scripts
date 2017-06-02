@@ -13,26 +13,16 @@ variador = minimalmodbus.Instrument(port, nodo)
 variador
 
 def Activar():
-	variador
-#	time.sleep(1)
 	variador.write_register(9,2) #Parametro b000=0002
-	variador
 	variador.write_register(15,4) #Parametro b004=0004
-#	time.sleep(1)
-	variador
-#	variador.write_register(125,2) #Parametro A164=0002
 
 def Desactivar():
-#	time.sleep(1)
-	variador
 	variador.write_register(9,0) #Parametro b000=0000
-	variador
-#	time.sleep(1)
 	variador.write_register(15,0) #Parametro b004=0000
-#	variador.write_register(125,3) #Parametro A164=0003
+
 
 def Arrancar():
-	variador.write_register(257,1,0) #
+	variador.write_register(257,1,0)
 
 def Conversion(flujo):
 	c=60
@@ -44,11 +34,8 @@ def Conversion(flujo):
 	return g
 
 def EscribirFrecuencia(registro,frecuencia):
-	Activar()
 	time.sleep(1)
 	variador.write_register(registro,frecuencia) 
-	time.sleep(1)
-	Desactivar()
 
 
 
