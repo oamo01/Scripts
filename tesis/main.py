@@ -3,20 +3,33 @@ from flask import render_template
 from flask import request
 import forms
 import minimalmodbus
+import time
 
-#port='/dev/ttyUSB0'
-#nodo=2
-#variador = minimalmodbus.Instrument(port, nodo)	
+
+
+port='/dev/tty.wchusbserial14220'
+nodo=2
+variador = minimalmodbus.Instrument(port, nodo)
+variador
 
 def Activar():
+	variador
+#	time.sleep(1)
 	variador.write_register(9,2) #Parametro b000=0002
+	variador
 	variador.write_register(15,4) #Parametro b004=0004
-	variador.write_register(125,2) #Parametro A164=0002
+#	time.sleep(1)
+	variador
+#	variador.write_register(125,2) #Parametro A164=0002
 
 def Desactivar():
-	variador.write_register(15,0) #Parametro b004=0000
+#	time.sleep(1)
+	variador
 	variador.write_register(9,0) #Parametro b000=0000
-	variador.write_register(125,3) #Parametro A164=0003
+	variador
+#	time.sleep(1)
+	variador.write_register(15,0) #Parametro b004=0000
+#	variador.write_register(125,3) #Parametro A164=0003
 
 def Arrancar():
 	variador.write_register(257,1,0) #
@@ -31,7 +44,10 @@ def Conversion(flujo):
 	return g
 
 def EscribirFrecuencia(registro,frecuencia):
+	Activar()
+	time.sleep(1)
 	variador.write_register(registro,frecuencia) 
+	time.sleep(1)
 	Desactivar()
 
 
@@ -43,11 +59,10 @@ app = Flask(__name__)
 def index():
 	comment_form = forms.CommentForm(request.form)
 	if request.method == 'POST' and comment_form.validate():
+		variador
 		a = comment_form.username.data
-		print a
 		f = Conversion(a)
-		print f
-		#EscribirFrecuencia(258,f)
+		EscribirFrecuencia(258,f)
 
 		
 
